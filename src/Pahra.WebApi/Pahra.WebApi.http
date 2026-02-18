@@ -1,0 +1,6 @@
+@Pahra.WebApi_HostAddress = http://localhost:5289
+
+GET {{Pahra.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
