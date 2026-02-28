@@ -1,0 +1,15 @@
+services:
+  postgres:
+      image: postgres:18
+      restart: always
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: P@ssword123!
+        POSTGRES_DB: pahra
+      networks:
+        - pahra-network
+      ports:
+        - 5432:5432
+networks:
+  pahra-network:
+    driver: bridge
