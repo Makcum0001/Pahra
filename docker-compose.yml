@@ -3,9 +3,9 @@ services:
       image: postgres:18
       restart: always
       environment:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: P@ssword123!
-        POSTGRES_DB: pahra
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
       networks:
         - pahra-network
       ports:
@@ -22,7 +22,7 @@ services:
       - 5200:5200
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=pahra;Username=postgres;Password=P@ssword123!
+      - ConnectionStrings__DefaultConnection=${ConnectionStrings__DefaultConnection}
     depends_on:
       - postgres
     networks:
