@@ -10,6 +10,26 @@ services:
         - pahra-network
       ports:
         - 5432:5432
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+
+  pahrawebapi:
+    image: pahrawebapi
+    build:
+      context: .
+      dockerfile: src/Pahra.WebApi/Dockerfile
+    ports:
+      - 5200:5200
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=pahra;Username=postgres;Password=P@ssword123!
+    depends_on:
+      - postgres
+    networks:
+      - pahra-network
+
 networks:
   pahra-network:
     driver: bridge
+volumes:
+  postgres_data:
