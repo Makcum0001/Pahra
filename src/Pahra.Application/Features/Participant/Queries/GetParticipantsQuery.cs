@@ -8,8 +8,15 @@ public record GetParticipantsQuery : IRequest<List<Participant>>;
 
 public class GetParticipantsQueryHandler : IRequestHandler<GetParticipantsQuery, List<Participant>>
 {
+    private readonly IParticipantRepository _participantRepository;
+
+    public GetParticipantsQueryHandler(IParticipantRepository participantRepository)
+    {
+        _participantRepository = participantRepository;
+    }
+
     public Task<List<Participant>> Handle(GetParticipantsQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return _participantRepository.GetAllAsync(cancellationToken);
     }
 }

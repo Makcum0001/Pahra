@@ -31,6 +31,8 @@ public class CreateParticipantCommandHandler : IRequestHandler<CreateParticipant
 
         await _participantRepository.AddAsync(participant, cancellationToken);
 
+        await _participantRepository.SaveChangesAsync(cancellationToken);
+
         return participant.Id;
     }
 }
