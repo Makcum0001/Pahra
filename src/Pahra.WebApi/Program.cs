@@ -15,7 +15,7 @@ builder.Services.AddLogging(c =>
     c.AddDebug();
 });
 
-builder.Services.AddApplicationLayer();
+builder.Services.AddApplicationLayer(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddCors(options =>
@@ -36,6 +36,7 @@ app.UseCors();
 
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.MapOpenApi();
     app.MapScalarApiReference(c =>
     {
