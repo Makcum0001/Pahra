@@ -4,6 +4,8 @@ using Pahra.Application.Features.Participants.Commands;
 using Pahra.Application.Features.Participants.Queries;
 using Pahra.Domain.Models;
 
+namespace Pahra.WebApi.Controllers;
+
 [ApiController]
 [Route("api/[controller]")]
 public class ParticipantsController : ControllerBase
