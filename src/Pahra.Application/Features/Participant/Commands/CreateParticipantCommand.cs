@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Pahra.Application.Exceptions;
 using Pahra.Domain.Models;
 using Pahra.Domain.Repositories;
 
@@ -21,6 +22,13 @@ public class CreateParticipantCommandHandler : IRequestHandler<CreateParticipant
 
     public async Task<int> Handle(CreateParticipantCommand request, CancellationToken cancellationToken)
     {
+        var existed = await _participantRepository.GetByEmailAsync(request.Email, cancellationToken);
+
+        if (existed != null)
+        {
+            throw new ConflictException("Участник с таким Email уже существует");
+        }
+
         var participant = new Participant
         {
             FirstName = request.FirstName,
