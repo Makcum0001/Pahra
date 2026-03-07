@@ -29,10 +29,14 @@ public class ParticipantRepository : IParticipantRepository
         return await _context.Participants.AsNoTracking().ToListAsync(cancellationToken);
     }
 
-    public async Task<Participant> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<Participant?> GetByEmailAsync(string email, CancellationToken cancellationToken)
     {
-        var participant = await _context.Participants.FindAsync(id, cancellationToken);
-        return participant;
+       return await _context.Participants.FirstOrDefaultAsync(p => p.Email == email, cancellationToken);
+    }
+
+    public async Task<Participant?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+    {
+        return await _context.Participants.FindAsync(id, cancellationToken);
     }
 
     public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
